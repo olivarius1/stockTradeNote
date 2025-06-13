@@ -1,0 +1,185 @@
+---
+description: 
+globs: *.js,*.html,*.css
+alwaysApply: false
+---
+# Cursor Rules - 股票/ETF网格交易账本项目
+
+## 项目信息
+- **项目类型**: 股票/ETF基金网格交易账本前端应用
+- **核心功能**: CSV数据解析、交易记录展示、收益统计与可视化
+- **用户群体**: 个人投资者、网格交易策略使用者
+
+## 技术栈规范
+
+### 核心技术
+- **框架**: Vue 3 + TypeScript (Composition API优先)
+- **构建工具**: Vite
+- **包管理**: pnpm (推荐) 或 npm
+- **Node版本**: >= 18.0.0
+
+### UI与样式
+- **UI框架**: Element Plus (el-前缀组件)
+- **样式框架**: Tailwind CSS (utility-first)
+- **图标**: Element Plus Icons / Heroicons
+- **响应式**: 移动端优先设计
+
+### 状态与路由
+- **状态管理**: Pinia (defineStore)
+- **路由**: Vue Router 4
+- **数据持久化**: localStorage/sessionStorage
+
+### 数据处理与可视化
+- **CSV解析**: PapaParse
+- **图表库**: ECharts (Vue-ECharts包装器)
+- **日期处理**: dayjs
+- **数字格式化**: 内置Intl.NumberFormat
+
+## 代码规范
+
+### 文件命名
+- **组件**: PascalCase (TradingRecord.vue)
+- **页面**: PascalCase (Dashboard.vue)
+- **工具函数**: camelCase (utils/csvParser.ts)
+- **类型定义**: PascalCase (types/Trading.ts)
+- **Store**: camelCase (stores/trading.ts)
+
+### 组件结构
+```vue
+<template>
+  <!-- 使用Element Plus + Tailwind CSS -->
+</template>
+
+<script setup lang="ts">
+// 1. 导入依赖
+// 2. 定义Props/Emits
+// 3. 响应式变量
+// 4. 计算属性
+// 5. 方法定义
+// 6. 生命周期
+</script>
+
+<style scoped>
+/* 仅在必要时使用，优先Tailwind类 */
+</style>
+```
+
+### TypeScript规范
+- 严格模式启用
+- 优先使用interface定义类型
+- 使用泛型增强类型安全
+- 避免any类型，使用unknown替代
+
+
+### CSV数据处理
+- 使用PapaParse解析CSV文件
+- 数据验证与清洗
+- 错误处理与用户提示
+- 支持多种CSV格式
+
+### 网格交易逻辑
+- 买卖配对算法（FIFO/LIFO可选）
+- 收益计算（已实现/未实现）
+- 网格层级管理
+- 持仓成本计算
+
+## 功能模块规范
+
+### 1. 数据导入模块
+- 文件上传组件
+- CSV格式验证
+- 数据预览功能
+- 错误提示机制
+
+### 2. 交易展示模块
+- 表格展示（Element Plus Table）
+- 筛选与搜索功能
+- 分页处理
+- 排序功能
+
+### 3. 收益统计模块
+- 总体收益概览
+- 分品种收益统计
+- 时间段收益分析
+- 关键指标展示
+
+### 4. 图表可视化模块
+- 收益曲线图（ECharts Line）
+- 交易分布图
+- 持仓结构图
+- 响应式图表设计
+
+## 性能优化规范
+
+### 前端性能
+- 使用v-memo优化列表渲染
+- 图表懒加载
+- 大数据量虚拟滚动
+- 计算属性缓存
+
+### 数据处理
+- 处理大CSV文件时注意
+- 加载数据
+- 防抖
+- 缓存计算结果
+
+## 用户体验规范
+
+### 交互设计
+- Loading状态提示
+- 操作确认对话框
+- 错误边界处理
+- 空状态展示
+
+### 响应式设计
+- 移动端适配
+- 触摸友好操作
+- 横屏支持
+- 主题切换支持
+
+## 开发规范
+
+### 代码质量
+- ESLint + Prettier自动格式化
+- 组件单一职责原则
+- 函数式编程优先
+- 注释规范（JSDoc）
+
+### 测试要求
+- 关键业务逻辑单元测试
+- 组件测试
+- E2E测试覆盖主要流程
+
+### Git规范
+- 提交信息格式：feat/fix/docs/style/refactor/test/chore
+- 分支命名：feature/功能名、hotfix/修复名
+- 小步快跑，频繁提交
+
+## 项目结构
+```
+src/
+├── components/          # 通用组件
+│   ├── common/         # 基础组件
+│   ├── charts/         # 图表组件
+│   └── trading/        # 交易相关组件
+├── views/              # 页面组件
+├── stores/             # Pinia状态管理
+├── utils/              # 工具函数
+├── types/              # TypeScript类型定义
+├── composables/        # 组合式函数
+└── assets/             # 静态资源
+```
+
+## 注意事项
+1. 数据安全：CSV文件仅本地处理，不上传服务器
+2. 精度处理：金融数据使用适当的小数位数
+3. 用户友好：提供清晰的操作指引和错误提示
+4. 扩展性：预留自定义配置接口
+5. 兼容性：支持主流浏览器
+
+## 提示偏好
+- 优先提供完整的组件实现
+- 包含类型定义和错误处理
+- 提供使用示例和注释
+- 考虑边界情况和异常处理
+- 遵循Vue 3最佳实践
